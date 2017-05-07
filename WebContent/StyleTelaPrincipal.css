@@ -1,0 +1,96 @@
+@CHARSET "ISO-8859-1";
+
+body{
+  background-color: #fff;
+  padding: 30px;
+}
+
+.grid{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.header-textarea{
+  position: absolute;
+  background-color: #3498db;
+  width: 496px;
+  margin-left: 0px;
+  padding: 5px;
+  color: #FFF;
+  font-family: "Tahoma";
+  display: flex;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-top: -28px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+}
+
+.caixa-comentario{
+  width: 500px;
+  border-radius: 4px;
+  margin-bottom: 80px !important;
+}
+
+textarea{
+  width: 100%;
+  border: 1px solid #3498db;
+  border-bottom: 4px solid #3498db;
+}
+
+.info-user{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.acoes-icones{
+    margin-left: 429px;
+    background-color: #ecf0f1;
+    width: 70px;
+    position: absolute;
+    height: 27px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5px;
+    border-top-right-radius: 4px;
+    border-right: 1px solid #3498db;
+    border: 1px solid #3498db;
+}
+
+.icone-remover{
+  width: 15px;
+  height: 15px
+}
+
+.icone-editar{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.botao-enviar-comentario{
+    cursor: pointer;
+    background-color: #3498db;
+    width: 100px;
+    position: absolute;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: none;
+    color: #FFF;
+    margin-top: -5px;
+    margin-left: 406px;
+    padding-bottom: 15px;
+    padding-top: 2px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+}
+
+.botao-enviar-comentario:hover{
+  background-color: #2574A9;
+}
