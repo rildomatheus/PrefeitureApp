@@ -14,7 +14,7 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 	private static RepositorioDenuncia instance;
 	
 	public RepositorioDenuncia(){
-		this.conec = Conect.conexaoBanco();
+		this.conec = (Connection) Conect.getInstance();
 		this.idDenuncia = 1;
 	}
 	
@@ -25,7 +25,6 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 	}
 	
 
-	@Override
 	public void cadastrar(Denuncia denuncia) throws SQLException {
 		denuncia.setIdDenuncia(idDenuncia);
 		String sql = "insert into denuncia(iddenuncia,setor,cidade,bairro,descricao,idusuario)values(?,?,?,?,?,?)";
@@ -44,7 +43,6 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 	}
 
-	@Override
 	public void remover(Denuncia denuncia) throws SQLException {
 		String sql = "delete from denuncia where iddenuncia = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
@@ -54,7 +52,6 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 	}
 
-	@Override
 	public void atualizar(Denuncia denuncia) throws SQLException {
 		String sql = "update denuncia set setor = ?,cidade = ?,bairro = ?,descricao = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
@@ -70,7 +67,6 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 }
 
-	@Override
 	public Denuncia procurar(Denuncia denuncia) throws SQLException {
 		String sql = "select*from denuncia where iddenuncia = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
@@ -95,7 +91,6 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 	}
 
-	@Override
 	public ArrayList<Denuncia> listar() throws SQLException {
 		ArrayList<Denuncia> lista = new ArrayList<Denuncia>();
 		String sql = "select*from denuncia";
