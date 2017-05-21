@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro Denuncia</title>
 
-<link rel="stylesheet" type="text/css" href="StyleCadastroDenuncia.css">
+<link rel="stylesheet" type="text/css" href="cad-denuncia.css">
 </head>
 <body>
 	<form method="post"action="CadastroDenunciaServlet">
