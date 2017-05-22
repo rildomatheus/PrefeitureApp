@@ -13,9 +13,9 @@
 	<div class="cadastroAdm">
 		<img src="img/im.png">
    		<form method="post" action="CadastroAdministradorServlet"/>
-      		<input type="text" placeholder="nome"/><br>
-      		<input type="text" placeholder="email"/><br>
-      		<input type="password" placeholder="senha"/><br>
+      		<input type="text" placeholder="Nome" name="nome"/><br>
+      		<input type="email" placeholder="Email" name="email"/><br>
+      		<input type="password" placeholder="Senha" name="senha"/><br>
      	 	<button>Cadastrar</button>
     	</form>
 	</div>

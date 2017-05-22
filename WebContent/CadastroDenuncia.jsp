@@ -20,15 +20,16 @@
 	</div>
 	
 	<div class="endereco">
-		<input type="text" placeholder="cidade">
-		<input type="text" placeholder="bairro">
+		<input type="text" placeholder="Cidade" name="cidade">
+		<input type="text" placeholder="Bairro" name="bairro">
+		
 	</div>
 	
 	<div class="descricao">
 		<h3>Descrição do problema</h3>
-		<textarea rows="10" cols="40"></textarea>
+		<textarea rows="10" cols="40" name="descricao"></textarea>
 	</div>
-	
+	<input type="hidden" name="idUsuario" value="1"/>
 	<button>Denunciar</button>
 	</form>
 </body>

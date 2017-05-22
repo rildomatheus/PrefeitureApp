@@ -1,0 +1,37 @@
+create table usuario(
+idusuario int(5) AUTO_INCREMENT,
+nome varchar(35),
+telefone varchar(14),
+email varchar(35),
+senha varchar(15),
+primary key(idusuario)
+);
+
+create table administrador(
+idadministrador int(5) AUTO_INCREMENT,
+nome varchar(35),
+email varchar(35),
+senha varchar(15),
+primary key(idadministrador)
+);
+
+create table denuncia(
+iddenuncia int(5) AUTO_INCREMENT,
+setor varchar(20),
+cidade varchar(35),
+bairro varchar(35),
+descricao varchar(500),
+idusuario int(5),
+idadministrador int(5),
+primary key(iddenuncia),
+foreign key (idusuario) references usuario(idusuario),
+foreign key (idadministrador) references administrador(idadministrador)
+);
+
+create table comentario(
+idcomentario int(5) AUTO_INCREMENT,
+descricao varchar(300),
+iddenuncia int(5),
+primary key(idcomentario),
+foreign key(iddenuncia) references denuncia(iddenuncia)
+);

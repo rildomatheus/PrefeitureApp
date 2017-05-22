@@ -10,12 +10,11 @@ import java.util.ArrayList;
 public class RepositorioDenuncia implements IRepositorioDenuncia {
 	
 	private Connection conec;
-	private int idDenuncia;
 	private static RepositorioDenuncia instance;
 	
 	public RepositorioDenuncia(){
-		this.conec = (Connection) Conect.getInstance();
-		this.idDenuncia = 1;
+		Conect conexao = new Conect();
+		this.conec = conexao.getConnection();
 	}
 	
 	public static RepositorioDenuncia getInstance(){
@@ -26,20 +25,17 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 	
 
 	public void cadastrar(Denuncia denuncia) throws SQLException {
-		denuncia.setIdDenuncia(idDenuncia);
-		String sql = "insert into denuncia(iddenuncia,setor,cidade,bairro,descricao,idusuario)values(?,?,?,?,?,?)";
+		String sql = "insert into denuncia(setor,cidade,bairro,descricao,idusuario)values(?,?,?,?,?)";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         
-		prepareStatement.setInt(1, idDenuncia);
-		prepareStatement.setString(2, denuncia.getSetor());
-		prepareStatement.setString(3, denuncia.getCidade());
-		prepareStatement.setString(4, denuncia.getBairro());
-		prepareStatement.setString(5, denuncia.getDescricao());
-		prepareStatement.setInt(6, denuncia.getIdUsuario());
+		prepareStatement.setString(1, denuncia.getSetor());
+		prepareStatement.setString(2, denuncia.getCidade());
+		prepareStatement.setString(3, denuncia.getBairro());
+		prepareStatement.setString(4, denuncia.getDescricao());
+		prepareStatement.setInt(5, denuncia.getIdUsuario());
 		
 		
 		prepareStatement.execute();
-		idDenuncia++;
 
 	}
 

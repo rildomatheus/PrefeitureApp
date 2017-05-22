@@ -13,9 +13,11 @@
 <div class="login">
 	<img src="img/im.png">
 		<form method="post" action="IndexServlet">
-			<input type="text" placeholder="login"/><br>
-			<input type="password" placeholder="senha"/>
-			<button>Entrar</button>
+			<input type="text" placeholder="Login" name="usuario"/><br>
+			<input type="password" placeholder="Senha" name="senha"/>
+			<button>Entrar</button><br><br>
+			<a href="CadastroUsuario.jsp">Cadastrar-se</a> 
+			
 		</form>
 </div>
 </body>

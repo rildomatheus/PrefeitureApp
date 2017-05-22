@@ -38,15 +38,16 @@ public class CadastroDenunciaServlet extends HttpServlet {
 		String setor = request.getParameter("setor");
 		String cidade = request.getParameter("cidade");
 		String bairro = request.getParameter("bairro");
-		String descricao = request.getParameter("descricao");
+		String descricao = request.getParameter("descricao"); 
+		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 		
 		Denuncia denuncia = new Denuncia();
 		denuncia.setSetor(setor);
 		denuncia.setCidade(cidade);
 		denuncia.setBairro(bairro);
 		denuncia.setDescricao(descricao);
+		denuncia.setIdUsuario(idUsuario);
 		
-		this.repositorio = RepositorioDenuncia.getInstance();
 		try {
 			repositorio.cadastrar(denuncia);
 		} catch (SQLException e) {

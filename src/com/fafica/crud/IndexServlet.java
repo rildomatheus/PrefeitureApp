@@ -41,12 +41,11 @@ public class IndexServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		
 		try {
-			boolean resposta = RepositorioUsuario.getInstance().consultar(usuario, senha);
+			boolean resposta = repositorioUsuario.consultar(usuario, senha);
 			if(resposta == true){
-				response.sendRedirect("telaPrincipal.jsp");
+				response.sendRedirect("TelaPrincipal.jsp");
 			}else {
-				request.setAttribute("falha", "Login Invalido");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				response.sendRedirect("Index.jsp");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

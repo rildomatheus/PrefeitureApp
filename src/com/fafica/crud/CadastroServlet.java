@@ -52,7 +52,7 @@ public class CadastroServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("CadastroUsuario.jsp");
+		response.sendRedirect("CadastroDenuncia.jsp");
 	}
 
 }

@@ -44,10 +44,9 @@ public class CadastroAdministradorServlet extends HttpServlet {
 		administrador.setEmail(email);
 		administrador.setSenha(senha);
 		
-		this.repositorio = RepositorioAdministrador.getInstance();
-		
 		try {
 			repositorio.cadastra(administrador);
+			response.sendRedirect("CadastroDenuncia.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

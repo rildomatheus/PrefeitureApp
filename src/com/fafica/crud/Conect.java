@@ -12,7 +12,7 @@ public class Conect {
 	private static volatile Conect instance;
 	private Connection conexao;
 
-		private Conect(){
+		public Conect(){
 		
 
 		}
@@ -21,7 +21,7 @@ public class Conect {
 			try{
 				if(this.conexao == null){
 					Class.forName("com.mysql.jdbc.Driver");
-					conexao = DriverManager.getConnection("jdbc:mysql://localhost/prefeiture");
+					conexao = DriverManager.getConnection("jdbc:mysql://localhost/prefeiture","root","");
 					System.out.println("conectei");
 				}
 			}catch(SQLException e){
