@@ -94,19 +94,21 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while(resultadoBusca.next()){
-			String setor = resultadoBusca.getString(1);
-			String cidade = resultadoBusca.getString(2);
-			String bairro = resultadoBusca.getString(3);
-			String descricao = resultadoBusca.getString(4);
+			String idDenuncia = resultadoBusca.getString(1);
+			String setor = resultadoBusca.getString(2);
+			String cidade = resultadoBusca.getString(3);
+			String bairro = resultadoBusca.getString(4);
+			String descricao = resultadoBusca.getString(5);
 			
 			Denuncia denuncia1 = new Denuncia();
+			denuncia1.setIdDenuncia(Integer.parseInt(idDenuncia));
 			denuncia1.setSetor(setor);
 			denuncia1.setCidade(cidade);
 			denuncia1.setBairro(bairro);
 			denuncia1.setDescricao(descricao);
 			
 			lista.add(denuncia1);
-		}
+		}//https://colorlib.com/wp/css3-table-templates/
 		return lista;
 	}
 
