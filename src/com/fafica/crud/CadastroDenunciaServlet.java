@@ -35,6 +35,7 @@ public class CadastroDenunciaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String titulo = request.getParameter("titulo");
 		String setor = request.getParameter("setor");
 		String cidade = request.getParameter("cidade");
 		String bairro = request.getParameter("bairro");
@@ -42,6 +43,7 @@ public class CadastroDenunciaServlet extends HttpServlet {
 		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 		
 		Denuncia denuncia = new Denuncia();
+		denuncia.setTitulo(titulo);
 		denuncia.setSetor(setor);
 		denuncia.setCidade(cidade);
 		denuncia.setBairro(bairro);

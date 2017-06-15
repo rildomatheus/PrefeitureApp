@@ -25,14 +25,15 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 	
 
 	public void cadastrar(Denuncia denuncia) throws SQLException {
-		String sql = "insert into denuncia(setor,cidade,bairro,descricao,idusuario)values(?,?,?,?,?)";
+		String sql = "insert into denuncia(titulo,setor,cidade,bairro,descricao,idusuario)values(?,?,?,?,?,?)";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         
-		prepareStatement.setString(1, denuncia.getSetor());
-		prepareStatement.setString(2, denuncia.getCidade());
-		prepareStatement.setString(3, denuncia.getBairro());
-		prepareStatement.setString(4, denuncia.getDescricao());
-		prepareStatement.setInt(5, denuncia.getIdUsuario());
+		prepareStatement.setString(1, denuncia.getTitulo());
+		prepareStatement.setString(2, denuncia.getSetor());
+		prepareStatement.setString(3, denuncia.getCidade());
+		prepareStatement.setString(4, denuncia.getBairro());
+		prepareStatement.setString(5, denuncia.getDescricao());
+		prepareStatement.setInt(6, denuncia.getIdUsuario());
 		
 		
 		prepareStatement.execute();
@@ -52,10 +53,11 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		String sql = "update denuncia set setor = ?,cidade = ?,bairro = ?,descricao = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
 		
-		prepareStatement.setString(1, denuncia.getSetor());
-		prepareStatement.setString(2, denuncia.getCidade());
-		prepareStatement.setString(3, denuncia.getBairro());
-		prepareStatement.setString(4, denuncia.getDescricao());
+		prepareStatement.setString(1, denuncia.getTitulo());
+		prepareStatement.setString(2, denuncia.getSetor());
+		prepareStatement.setString(3, denuncia.getCidade());
+		prepareStatement.setString(4, denuncia.getBairro());
+		prepareStatement.setString(5, denuncia.getDescricao());
 		
 		
 		
@@ -70,12 +72,14 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while(resultadoBusca.next()){
-			String setor = resultadoBusca.getString(1);
-			String cidade = resultadoBusca.getString(2);
-			String bairro = resultadoBusca.getString(3);
-			String descricao = resultadoBusca.getString(4);
+			String titulo = resultadoBusca.getString(1);
+			String setor = resultadoBusca.getString(2);
+			String cidade = resultadoBusca.getString(3);
+			String bairro = resultadoBusca.getString(4);
+			String descricao = resultadoBusca.getString(5);
 			
 			Denuncia denuncia1 = new Denuncia();
+			denuncia1.setTitulo(titulo);
 			denuncia1.setSetor(setor);
 			denuncia1.setCidade(cidade);
 			denuncia1.setBairro(bairro);
@@ -95,13 +99,15 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while(resultadoBusca.next()){
 			String idDenuncia = resultadoBusca.getString(1);
-			String setor = resultadoBusca.getString(2);
-			String cidade = resultadoBusca.getString(3);
-			String bairro = resultadoBusca.getString(4);
-			String descricao = resultadoBusca.getString(5);
+			String titulo = resultadoBusca.getString(2);
+			String setor = resultadoBusca.getString(3);
+			String cidade = resultadoBusca.getString(4);
+			String bairro = resultadoBusca.getString(5);
+			String descricao = resultadoBusca.getString(6);
 			
 			Denuncia denuncia1 = new Denuncia();
 			denuncia1.setIdDenuncia(Integer.parseInt(idDenuncia));
+			denuncia1.setTitulo(titulo);
 			denuncia1.setSetor(setor);
 			denuncia1.setCidade(cidade);
 			denuncia1.setBairro(bairro);

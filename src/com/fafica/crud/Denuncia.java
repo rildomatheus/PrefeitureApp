@@ -3,6 +3,7 @@ package com.fafica.crud;
 public class Denuncia {
 	
 	private int idDenuncia;
+	private String titulo;
 	private String comentario;
 	private String setor;
 	private String cidade;
@@ -10,12 +11,20 @@ public class Denuncia {
 	private String descricao;
 	private int idUsuario;
 	
+
+	
 	@Override
 	public String toString() {
-		return "Denuncia [idDenuncia=" + idDenuncia + ", setor=" + setor + ", cidade=" + cidade + ", bairro=" + bairro
-				+ ", descricao=" + descricao + ", idUsuario=" + idUsuario + "]";
+		return "Denuncia [idDenuncia=" + idDenuncia + ", titulo=" + titulo + ", comentario=" + comentario + ", setor="
+				+ setor + ", cidade=" + cidade + ", bairro=" + bairro + ", descricao=" + descricao + ", idUsuario="
+				+ idUsuario + "]";
 	}
-	
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	public String getComentario() {
 		return comentario;
 	}

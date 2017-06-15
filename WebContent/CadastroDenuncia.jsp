@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -9,7 +8,9 @@
 <link rel="stylesheet" type="text/css" href="cad-denuncia.css">
 </head>
 <body>
+<jsp:include page="cabecalho.jsp"></jsp:include>
 	<form method="post"action="CadastroDenunciaServlet">
+	
 	<h3>Em qual setor é a sua denúncia?</h3>
 	
 	<div class="setor">
@@ -20,6 +21,7 @@
 	</div>
 	
 	<div class="endereco">
+		<input type="text" placeholder="Título" name="titulo">
 		<input type="text" placeholder="Cidade" name="cidade">
 		<input type="text" placeholder="Bairro" name="bairro">
 		
