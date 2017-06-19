@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.fafica.entidades.Usuario;
+
 public class RepositorioUsuario implements IRepositorioUsuario {
 
 	private Connection conec;

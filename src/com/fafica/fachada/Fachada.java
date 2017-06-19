@@ -2,10 +2,10 @@ package com.fafica.fachada;
 
 import java.sql.SQLException;
 
-import com.fafica.crud.Denuncia;
 import com.fafica.crud.RepositorioDenuncia;
 import com.fafica.crud.RepositorioUsuario;
-import com.fafica.crud.Usuario;
+import com.fafica.entidades.Denuncia;
+import com.fafica.entidades.Usuario;
 
 public class Fachada {
 	

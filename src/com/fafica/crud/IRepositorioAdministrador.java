@@ -3,6 +3,8 @@ package com.fafica.crud;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fafica.entidades.Administrador;
+
 public interface IRepositorioAdministrador {
 	
 	public void cadastra(Administrador administrador) throws SQLException;

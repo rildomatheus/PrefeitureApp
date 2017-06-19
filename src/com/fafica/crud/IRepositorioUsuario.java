@@ -3,6 +3,8 @@ package com.fafica.crud;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fafica.entidades.Usuario;
+
 public interface IRepositorioUsuario {
 	
 	public void cadastrarUsuario(Usuario usuario) throws SQLException;

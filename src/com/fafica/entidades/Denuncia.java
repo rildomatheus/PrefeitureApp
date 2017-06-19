@@ -1,4 +1,4 @@
-package com.fafica.crud;
+package com.fafica.entidades;
 
 public class Denuncia {
 	

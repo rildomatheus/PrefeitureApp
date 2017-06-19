@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fafica.entidades.Administrador;
+import com.fafica.entidades.Comentario;
+import com.fafica.entidades.Usuario;
 
 /**
- * Servlet implementation class CadastroAdministradorServlet
+ * Servlet implementation class CadastroComentario
  */
-@WebServlet("/CadastroAdministradorServlet")
-public class CadastroAdministradorServlet extends HttpServlet {
+@WebServlet("/CadastroComentario")
+public class CadastroComentario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    private IRepositorioAdministrador repositorio;
-    
-    public CadastroAdministradorServlet() {
-       this.repositorio = new RepositorioAdministrador();
-        
+	IRepositorioComentario repositorio;
+	
+    public CadastroComentario() {
+        super();
+        repositorio = new RepositorioComentario();
     }
 
 	/**
@@ -37,23 +38,20 @@ public class CadastroAdministradorServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
+		String descricao = request.getParameter("descricao");
 		
-		Administrador administrador = new Administrador();
-		administrador.setNome(nome);
-		administrador.setEmail(email);
-		administrador.setSenha(senha);
 		
+		Comentario comentario = new Comentario();
+		comentario.setDescricao(descricao);
+		
+		this.repositorio = RepositorioComentario.getInstance();
 		try {
-			repositorio.cadastra(administrador);
-			response.sendRedirect("CadastroDenuncia.jsp");
+			repositorio.cadastrarComentario(comentario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		response.sendRedirect("TelaPrincipal.jsp");
 		doGet(request, response);
 	}
 
