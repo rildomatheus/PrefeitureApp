@@ -1,4 +1,4 @@
-package com.fafica.crud;
+package com.fafica.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fafica.crud.IRepositorioComentario;
+import com.fafica.crud.RepositorioComentario;
 import com.fafica.entidades.Comentario;
 import com.fafica.entidades.Usuario;
 

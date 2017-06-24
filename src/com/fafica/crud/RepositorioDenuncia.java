@@ -42,10 +42,10 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 	}
 
-	public void remover(Denuncia denuncia) throws SQLException {
+	public void remover(int id) throws SQLException {
 		String sql = "delete from denuncia where iddenuncia = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, denuncia.getIdDenuncia());
+		prepareStatement.setInt(1, id);
 		
 		prepareStatement.executeUpdate();
 
@@ -118,6 +118,31 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 			lista.add(denuncia1);
 		}//https://colorlib.com/wp/css3-table-templates/
 		return lista;
+	}
+	
+	public Denuncia procurarId(int id) throws SQLException{
+		String sql = "select*from denuncia where iddenuncia = ?";
+		PreparedStatement prepareStatement = conec.prepareStatement(sql);
+		prepareStatement.setInt(1, id);
+		
+		ResultSet resultadoBusca = prepareStatement.executeQuery();
+		while(resultadoBusca.next()){
+			String titulo = resultadoBusca.getString(1);
+			String setor = resultadoBusca.getString(2);
+			String cidade = resultadoBusca.getString(3);
+			String bairro = resultadoBusca.getString(4);
+			String descricao = resultadoBusca.getString(5);
+			
+			Denuncia denuncia1 = new Denuncia();
+			denuncia1.setTitulo(titulo);
+			denuncia1.setSetor(setor);
+			denuncia1.setCidade(cidade);
+			denuncia1.setBairro(bairro);
+			denuncia1.setDescricao(descricao);
+			
+			return denuncia1;
+		}
+		return null;
 	}
 
 }

@@ -40,10 +40,10 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 	}
 
-	public void remover(Administrador administrador) throws SQLException {
+	public void remover(int id) throws SQLException {
 		String sql = "delete from administrador where idAdministrador = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, administrador.getId());
+		prepareStatement.setInt(1, id);
 
 		prepareStatement.executeUpdate();
 
@@ -137,6 +137,27 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 			throw new RuntimeException();
 		}
 
+	}
+	
+	public Administrador procurarId(int id) throws SQLException{
+		String sql = "select*from Administrador where idAdministrador = ?";
+		PreparedStatement prepareStatement = conec.prepareStatement(sql);
+		prepareStatement.setInt(1, id);
+
+		ResultSet resultadoBusca = prepareStatement.executeQuery();
+		while (resultadoBusca.next()) {
+			String nome = resultadoBusca.getString(1);
+			String email = resultadoBusca.getString(2);
+			String senha = resultadoBusca.getString(3);
+
+			Administrador administrador1 = new Administrador();
+			administrador1.setNome(nome);
+			administrador1.setEmail(email);
+			administrador1.setSenha(senha);
+
+			return administrador1;
+		}
+		return null;
 	}
 
 }

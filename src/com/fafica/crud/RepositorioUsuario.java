@@ -39,10 +39,10 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 
 	}
 
-	public void removerUsuario(Usuario usuario) throws SQLException {
+	public void removerUsuario(int id) throws SQLException {
 		String sql = "delete from usuario where idusuario = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, usuario.getIdUsuario());
+		prepareStatement.setInt(1, id);
 
 		prepareStatement.executeUpdate();
 
@@ -145,6 +145,29 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 			throw new RuntimeException();
 		}
 
+	}
+	
+	public Usuario procurarId(int id) throws SQLException{
+		String sql = "select*from usuario where idusuario = ?";
+		PreparedStatement prepareStatement = conec.prepareStatement(sql);
+		prepareStatement.setInt(1, id);
+
+		ResultSet resultadoBusca = prepareStatement.executeQuery();
+		while (resultadoBusca.next()) {
+			String nome = resultadoBusca.getString(1);
+			String telefone = resultadoBusca.getString(2);
+			String email = resultadoBusca.getString(3);
+			String senha = resultadoBusca.getString(4);
+
+			Usuario usuario1 = new Usuario();
+			usuario1.setNome(nome);
+			usuario1.setTelefone(telefone);
+			usuario1.setEmail(email);
+			usuario1.setSenha(senha);
+
+			return usuario1;
+		}
+		return null;
 	}
 
 }

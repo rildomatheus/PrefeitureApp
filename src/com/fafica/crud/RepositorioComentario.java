@@ -40,10 +40,10 @@ public class RepositorioComentario implements IRepositorioComentario {
 
 	}
 
-	public void removerComentario(Comentario comentario) throws SQLException {
+	public void removerComentario(int id) throws SQLException {
 		String sql = "delete from comentario where idcomentario = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, comentario.getIdComentario());
+		prepareStatement.setInt(1, id);
 		
 		prepareStatement.executeUpdate();
 
@@ -97,6 +97,24 @@ public class RepositorioComentario implements IRepositorioComentario {
 		}//https://colorlib.com/wp/css3-table-templates/
 		return lista;
 	
+	}
+	
+	public Comentario procurarId(int id) throws SQLException{
+		String sql = "select*from comentario where idcomentario = ?";
+		PreparedStatement prepareStatement = conec.prepareStatement(sql);
+		prepareStatement.setInt(1, id);
+		
+		ResultSet resultadoBusca = prepareStatement.executeQuery();
+		while(resultadoBusca.next()){
+			String descricao = resultadoBusca.getString(1);
+
+			
+			Comentario comentario1 = new Comentario();
+			comentario1.setDescricao(descricao);
+			
+			return comentario1;
+		}
+		return null;
 	}
 
 }

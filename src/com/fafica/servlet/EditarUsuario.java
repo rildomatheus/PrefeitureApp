@@ -1,35 +1,56 @@
-package com.fafica.crud;
+package com.fafica.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fafica.crud.IRepositorioUsuario;
+import com.fafica.crud.RepositorioUsuario;
+import com.fafica.entidades.Denuncia;
 import com.fafica.entidades.Usuario;
 
 /**
- * Servlet implementation class CadastroServlet
+ * Servlet implementation class EditarUsuario
  */
-@WebServlet("/CadastroServlet")
-public class CadastroServlet extends HttpServlet {
+@WebServlet("/EditarUsuario")
+public class EditarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-	private IRepositorioUsuario repositorio;
-    public CadastroServlet() {
+       
+    IRepositorioUsuario repositorio;
+	
+    public EditarUsuario() {
         super();
-        repositorio = new RepositorioUsuario();
+        this.repositorio = new RepositorioUsuario();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Usuario usuario = new Usuario();
+		String i = request.getParameter("i");
+		if(i != null && i != " "){
+			int id = Integer.parseInt(i);
+			this.repositorio = RepositorioUsuario.getInstance();
+			 try {
+				 
+				usuario = repositorio.procurarId(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Editar.jsp");
+		request.setAttribute("usuario", usuario);
+		dispatcher.forward(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**

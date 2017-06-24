@@ -1,35 +1,53 @@
-package com.fafica.crud;
+package com.fafica.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fafica.crud.IRepositorioDenuncia;
+import com.fafica.crud.RepositorioDenuncia;
 import com.fafica.entidades.Denuncia;
 
 /**
- * Servlet implementation class CadastroDenunciaServlet
+ * Servlet implementation class EditarDenuncia
  */
-@WebServlet("/CadastroDenunciaServlet")
-public class CadastroDenunciaServlet extends HttpServlet {
+@WebServlet("/EditarDenuncia")
+public class EditarDenuncia extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private IRepositorioDenuncia repositorio;
+    IRepositorioDenuncia repositorio;
 	
-    public CadastroDenunciaServlet() {
+    public EditarDenuncia() {
         super();
-        repositorio = new RepositorioDenuncia();
+        this.repositorio = new RepositorioDenuncia();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Denuncia denuncia = new Denuncia();
+		String i = request.getParameter("i");
+		if(i != null && i != " "){
+			int id = Integer.parseInt(i);
+			this.repositorio = RepositorioDenuncia.getInstance();
+			 try {
+				 
+				denuncia = repositorio.procurarId(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Editar.jsp");
+		request.setAttribute("denuncia", denuncia);
+		dispatcher.forward(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -63,6 +81,7 @@ public class CadastroDenunciaServlet extends HttpServlet {
 		
 		
 		doGet(request, response);
+	
 	}
 
 }
