@@ -64,7 +64,7 @@ String descricao = request.getParameter("descricao");
 		
 		this.repositorio = RepositorioComentario.getInstance();
 		try {
-			repositorio.cadastrarComentario(comentario);
+			repositorio.atualizarComentario(comentario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

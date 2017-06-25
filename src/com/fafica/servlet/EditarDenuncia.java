@@ -71,7 +71,7 @@ public class EditarDenuncia extends HttpServlet {
 		denuncia.setIdUsuario(idUsuario);
 		
 		try {
-			repositorio.cadastrar(denuncia);
+			repositorio.atualizar(denuncia);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -66,7 +66,7 @@ public class EditarAdministrador extends HttpServlet {
 		administrador.setSenha(senha);
 		
 		try {
-			repositorio.cadastra(administrador);
+			repositorio.atualizar(administrador);
 			response.sendRedirect("CadastroDenuncia.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -70,7 +70,7 @@ public class EditarUsuario extends HttpServlet {
 		
 		this.repositorio = RepositorioUsuario.getInstance();
 		try {
-			repositorio.cadastrarUsuario(usuario);
+			repositorio.atualizar(usuario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
