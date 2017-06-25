@@ -42,10 +42,10 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 
 	}
 
-	public void remover(int id) throws SQLException {
+	public void remover(Denuncia denuncia) throws SQLException {
 		String sql = "delete from denuncia where iddenuncia = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, id);
+		prepareStatement.setInt(1, denuncia.getIdDenuncia());
 		
 		prepareStatement.executeUpdate();
 

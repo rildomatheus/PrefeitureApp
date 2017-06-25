@@ -39,10 +39,10 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 
 	}
 
-	public void removerUsuario(int id) throws SQLException {
+	public void removerUsuario(Usuario usuario) throws SQLException {
 		String sql = "delete from usuario where idusuario = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, id);
+		prepareStatement.setInt(1, usuario.getIdUsuario());
 
 		prepareStatement.executeUpdate();
 

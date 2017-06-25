@@ -40,10 +40,10 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 
 	}
 
-	public void remover(int id) throws SQLException {
+	public void remover(Administrador administrador) throws SQLException {
 		String sql = "delete from administrador where idAdministrador = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, id);
+		prepareStatement.setInt(1, administrador.getId());
 
 		prepareStatement.executeUpdate();
 

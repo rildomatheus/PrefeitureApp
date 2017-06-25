@@ -40,10 +40,10 @@ public class RepositorioComentario implements IRepositorioComentario {
 
 	}
 
-	public void removerComentario(int id) throws SQLException {
+	public void removerComentario(Comentario comentario) throws SQLException {
 		String sql = "delete from comentario where idcomentario = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, id);
+		prepareStatement.setInt(1, comentario.getIdComentario());
 		
 		prepareStatement.executeUpdate();
 
