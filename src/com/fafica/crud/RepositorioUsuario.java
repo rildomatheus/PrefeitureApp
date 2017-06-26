@@ -27,13 +27,14 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 	}
 
 	public void cadastrarUsuario(Usuario usuario) throws SQLException {
-		String sql = "insert into usuario(nome,telefone,email,senha)values(?,?,?,?)";
+		String sql = "insert into usuario(nome,telefone,email,senha,tipo)values(?,?,?,?,?)";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		prepareStatement.setString(1, usuario.getNome());
 		prepareStatement.setString(2, usuario.getTelefone());
 		prepareStatement.setString(3, usuario.getEmail());
 		prepareStatement.setString(4, usuario.getSenha());
+		prepareStatement.setString(5, usuario.getTipo());
 
 		prepareStatement.execute();
 
@@ -50,34 +51,39 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 
 	public void atualizar(Usuario usuario) throws SQLException {
 
-		String sql = "update usuario set nome = ?,telefone = ?,email = ?,senha = ?";
+		String sql = "update usuario set nome = ?,telefone = ?,email = ?,senha = ?, tipo = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
 
 		prepareStatement.setString(1, usuario.getNome());
 		prepareStatement.setString(2, usuario.getTelefone());
 		prepareStatement.setString(3, usuario.getEmail());
 		prepareStatement.setString(4, usuario.getSenha());
+		prepareStatement.setString(5, usuario.getTipo());
 
 		prepareStatement.executeUpdate();
 	}
 
-	public Usuario procurar(Usuario usuario) throws SQLException {
+	public Usuario procurar(int idUsuario) throws SQLException {
 		String sql = "select*from usuario where idusuario = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
-		prepareStatement.setInt(1, usuario.getIdUsuario());
+		prepareStatement.setInt(1, idUsuario);
 
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while (resultadoBusca.next()) {
-			String nome = resultadoBusca.getString(1);
-			String telefone = resultadoBusca.getString(2);
-			String email = resultadoBusca.getString(3);
-			String senha = resultadoBusca.getString(4);
+			int idUsuarioAux = resultadoBusca.getInt(1);
+			String nome = resultadoBusca.getString(2);
+			String telefone = resultadoBusca.getString(3);
+			String email = resultadoBusca.getString(4);
+			String senha = resultadoBusca.getString(5);
+			String tipo = resultadoBusca.getString(6);
 
 			Usuario usuario1 = new Usuario();
+			usuario1.setIdUsuario(idUsuarioAux);
 			usuario1.setNome(nome);
 			usuario1.setTelefone(telefone);
 			usuario1.setEmail(email);
 			usuario1.setSenha(senha);
+			usuario1.setTipo(tipo);
 
 			return usuario1;
 		}
@@ -92,16 +98,20 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while (resultadoBusca.next()) {
-			String nome = resultadoBusca.getString(1);
-			String telefone = resultadoBusca.getString(2);
-			String email = resultadoBusca.getString(3);
-			String senha = resultadoBusca.getString(4);
+			int idUsuario = resultadoBusca.getInt(1);
+			String nome = resultadoBusca.getString(2);
+			String telefone = resultadoBusca.getString(3);
+			String email = resultadoBusca.getString(4);
+			String senha = resultadoBusca.getString(5);
+			String tipo = resultadoBusca.getString(6);
 
 			Usuario usuario1 = new Usuario();
+			usuario1.setIdUsuario(idUsuario);
 			usuario1.setNome(nome);
 			usuario1.setTelefone(telefone);
 			usuario1.setEmail(email);
 			usuario1.setSenha(senha);
+			usuario1.setTipo(tipo);
 			lista.add(usuario1);
 
 		}
@@ -109,12 +119,9 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 		return lista;
 	}
 
-	public boolean consultar(String usuario, String senha) throws ClassNotFoundException, SQLException {
-		boolean autenticado = false;
+	public Usuario consultar(String usuario, String senha) throws ClassNotFoundException, SQLException {
+		Usuario autenticado = null;
 		String sql = null;
-		// PreparedStatement prepareStatement = conec.prepareStatement(sql);
-
-		// fui pegar um biscoito - ii entao doidao. tbm peguei biscoito:)
 
 		sql = "select*from usuario where email = ? and senha = ?";
 		PreparedStatement stmt;
@@ -128,10 +135,20 @@ public class RepositorioUsuario implements IRepositorioUsuario {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				int idUsuario = rs.getInt(1);
+				String nome = rs.getString(2);
+				String telefone = rs.getString(3);
 				String loginBanco = rs.getString(4);
 				String senhaBanco = rs.getString(5);
+				String tipo = rs.getString(6);
 				if ((loginBanco.equals(usuario)) && (senhaBanco.equals(senha))) {
-					autenticado = true;
+					autenticado = new Usuario();
+					autenticado.setNome(nome);
+					autenticado.setIdUsuario(idUsuario);
+					autenticado.setTelefone(telefone);
+					autenticado.setSenha(senhaBanco);
+					autenticado.setEmail(loginBanco);
+					autenticado.setTipo(tipo);
 					break;
 				}
 			}

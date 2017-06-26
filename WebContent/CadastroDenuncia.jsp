@@ -1,3 +1,4 @@
+<%@page import="com.fafica.entidades.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
@@ -8,7 +9,25 @@
 <link rel="stylesheet" type="text/css" href="cad-denuncia.css">
 </head>
 <body>
-<jsp:include page="cabecalho.jsp"></jsp:include>
+<%
+HttpSession sessao = request.getSession();
+		Usuario usuarioAutenticado = (Usuario) sessao.getAttribute("usuarioAutenticado");
+
+		if (usuarioAutenticado == null) {
+			usuarioAutenticado = new Usuario();
+			usuarioAutenticado.setTipo("Anonimo");
+		}
+
+		if (usuarioAutenticado.getTipo().equals("Administrador")) {
+	%>
+	<jsp:include page="cabecalhoAdm.jsp"></jsp:include>
+	<%
+		} else {
+	%>
+	<jsp:include page="cabecalho.jsp"></jsp:include>
+	<%
+		}
+	%>
 	<form method="post"action="CadastroDenunciaServlet">
 	
 	<h3>Em qual setor é a sua denúncia?</h3>

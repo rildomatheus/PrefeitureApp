@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fafica.crud.RepositorioAdministrador;
-import com.fafica.crud.RepositorioComentario;
 import com.fafica.entidades.Administrador;
-import com.fafica.entidades.Comentario;
 
 /**
  * Servlet implementation class ExcluirAdministrador

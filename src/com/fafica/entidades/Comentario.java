@@ -4,7 +4,15 @@ public class Comentario {
 	
 	int idComentario;
 	String descricao;
-	Denuncia denuncia;
+	int idDenuncia;
+	int idUsuario;
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	public int getIdComentario() {
 		return idComentario;
 	}
@@ -17,12 +25,17 @@ public class Comentario {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Denuncia getDenuncia() {
-		return denuncia;
+	public int getIdDenuncia() {
+		return idDenuncia;
 	}
-	public void setDenuncia(Denuncia denuncia) {
-		this.denuncia = denuncia;
+	public void setIdDenuncia(int idDenuncia) {
+		this.idDenuncia = idDenuncia;
 	}
+	@Override
+	public String toString() {
+		return "Comentario [idComentario=" + idComentario + ", descricao=" + descricao + ", idDenuncia=" + idDenuncia
+				+ ", idUsuario=" + idUsuario + "]";
+	}	
 	
 
 }

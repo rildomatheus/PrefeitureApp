@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.fafica.crud.IRepositorioAdministrador;
 import com.fafica.crud.RepositorioAdministrador;
 import com.fafica.entidades.Administrador;
-import com.fafica.entidades.Usuario;
 
 /**
  * Servlet implementation class EditarAdministrador

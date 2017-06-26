@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fafica.crud.RepositorioComentario;
 import com.fafica.crud.RepositorioUsuario;
 import com.fafica.entidades.Comentario;
-import com.fafica.entidades.Usuario;
 
 /**
  * Servlet implementation class ExcluirComentario
@@ -35,21 +35,27 @@ public class ExcluirComentario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Comentario comentario = new Comentario();
 		RepositorioComentario repositorio = new RepositorioComentario();
+		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 		
-		String acao = request.getParameter("acao");
 		
-		 if(acao != null && acao.equals("ex")){
-			 String descricao  = request.getParameter("descricao");
-			 comentario.setDescricao(descricao);
+		 
+			 int idComentario  = Integer.parseInt(request.getParameter("idComentario"));
+			 int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+			 comentario.setIdComentario(idComentario);
 			 try {
 				 repositorio.removerComentario(comentario);
+				 
+				 if(idUsuario != 0){
+						HttpSession sessao = request.getSession();
+						sessao.setAttribute("usuarioAutenticado", repositorioUsuario.procurar(idUsuario));
+						request.getRequestDispatcher("TelaPrincipal.jsp").forward(request, response);	
+					}else{ response.sendRedirect("TelaPrincipal.jsp");}
+				 
 			 } catch (SQLException e) {
 				 // TODO Auto-generated catch block
 				 e.printStackTrace();
 			 }
-
-			 response.sendRedirect("TelaPrincipal.jsp");
-		 }
+		 
 	}
 
 	/**

@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fafica.crud.RepositorioDenuncia;
 import com.fafica.crud.RepositorioUsuario;
-import com.fafica.entidades.Denuncia;
 import com.fafica.entidades.Usuario;
 
 /**

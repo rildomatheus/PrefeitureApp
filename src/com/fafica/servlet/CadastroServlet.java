@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fafica.crud.IRepositorioUsuario;
 import com.fafica.crud.RepositorioUsuario;
@@ -48,15 +49,26 @@ public class CadastroServlet extends HttpServlet {
 		usuario.setTelefone(telefone);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
+		usuario.setTipo("Comum");
 		
 		this.repositorio = RepositorioUsuario.getInstance();
 		try {
 			repositorio.cadastrarUsuario(usuario);
+			RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
+			Usuario usuarioAux = repositorioUsuario.consultar(usuario.getEmail(), usuario.getSenha());
+			if(usuario != null){
+				HttpSession sessao = request.getSession();
+				sessao.setAttribute("usuarioAutenticado", usuarioAux);
+				request.getRequestDispatcher("TelaPrincipal.jsp").forward(request, response);
+
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		response.sendRedirect("CadastroDenuncia.jsp");
 	}
 
 }

@@ -7,12 +7,20 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private String senha;
+	private String tipo;
 
+	
 	
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + ", telefone=" + telefone + ", email=" + email
-				+ ", senha=" + senha + "]";
+				+ ", senha=" + senha + ", tipo=" + tipo + "]";
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	public int getIdUsuario() {
 		return idUsuario;

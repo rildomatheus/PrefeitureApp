@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fafica.crud.IRepositorioUsuario;
 import com.fafica.crud.RepositorioUsuario;
-import com.fafica.entidades.Denuncia;
 import com.fafica.entidades.Usuario;
 
 /**

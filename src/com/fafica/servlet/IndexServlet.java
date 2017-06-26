@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fafica.crud.RepositorioUsuario;
+import com.fafica.entidades.Usuario;
 
 /**
  * Servlet implementation class IndexServlet
@@ -30,8 +32,11 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession sessao = request.getSession(false);
+		if(sessao!=null){
+			sessao.invalidate();
+		}
+		response.sendRedirect("Index.jsp");
 	}
 
 	/**
@@ -39,13 +44,19 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
-		String usuario = request.getParameter("usuario");
+		String login = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
+		Usuario usuario = new Usuario();
+
+		
 		
 		try {
-			boolean resposta = repositorioUsuario.consultar(usuario, senha);
-			if(resposta == true){
-				response.sendRedirect("TelaPrincipal.jsp");
+			usuario = repositorioUsuario.consultar(login, senha);
+			if(usuario != null){
+					HttpSession sessao = request.getSession();
+					sessao.setAttribute("usuarioAutenticado", usuario);
+					request.getRequestDispatcher("TelaPrincipal.jsp").forward(request, response);
+
 			}else {
 				response.sendRedirect("Index.jsp");
 			}
