@@ -17,7 +17,7 @@
 			<ul id="nav">
 				<li class="selected"><a href="TelaPrincipal.jsp">Tela principal</a></li>
 				<li class="selected"><a href="CadastroDenuncia.jsp">Cadastrar denúncia</a></li>
-				<li class="selected"><a href="UsuariosServlet.jsp">Usuários</a></li>
+				<!-- <li class="selected"><a href="UsuariosServlet.jsp">Usuários</a></li>-->
 				<li class="selected"><a href="IndexServlet">Sair</a></li>
 			</ul>
 		</nav>

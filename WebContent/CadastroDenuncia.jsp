@@ -33,10 +33,10 @@ HttpSession sessao = request.getSession();
 	<h3>Em qual setor é a sua denúncia?</h3>
 	
 	<div class="setor">
-		<input type="radio" name="setor" value="hidrico"> Hidrico
-		<input type="radio" name="setor" value="saneamento basico"> Saneamento básico
-		<input type="radio" name="setor" value="iluminacao"> Iluminação
-		<input type="radio" name="setor" value="saude"> Saúde
+		<input type="radio" name="setor" value="Hídrico"> Hídrico
+		<input type="radio" name="setor" value="Saneamento básico"> Saneamento básico
+		<input type="radio" name="setor" value="Iluminação"> Iluminação
+		<input type="radio" name="setor" value="Saúde"> Saúde
 	</div>
 	
 	<div class="endereco">
@@ -50,7 +50,7 @@ HttpSession sessao = request.getSession();
 		<h3>Descrição do problema</h3>
 		<textarea rows="10" cols="40" name="descricao"></textarea>
 	</div>
-	<input type="hidden" name="idUsuario" value="1"/>
+	<input type="hidden" name="idUsuario" value="<%=usuarioAutenticado.getIdUsuario()%>"/>
 	<button>Denunciar</button>
 	</form>
 </body>

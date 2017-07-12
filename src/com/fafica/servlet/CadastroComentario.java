@@ -55,11 +55,13 @@ public class CadastroComentario extends HttpServlet {
 		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 		try {
 			repositorio.cadastrarComentario(comentario);
+			
 			if(idUsuario != 0){
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("usuarioAutenticado", repositorioUsuario.procurar(idUsuario));
 				request.getRequestDispatcher("TelaPrincipal.jsp").forward(request, response);	
 			}else{ response.sendRedirect("TelaPrincipal.jsp");}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
