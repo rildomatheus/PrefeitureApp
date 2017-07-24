@@ -10,14 +10,30 @@ public class Denuncia {
 	private String bairro;
 	private String descricao;
 	private int idUsuario;
+	private String foto;
+	private String video;
 	
 
 	
+
 	@Override
 	public String toString() {
 		return "Denuncia [idDenuncia=" + idDenuncia + ", titulo=" + titulo + ", comentario=" + comentario + ", setor="
 				+ setor + ", cidade=" + cidade + ", bairro=" + bairro + ", descricao=" + descricao + ", idUsuario="
-				+ idUsuario + "]";
+				+ idUsuario + ", foto=" + foto + ", video=" + video + "]";
+	}
+	
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
 	}
 	public String getTitulo() {
 		return titulo;

@@ -52,7 +52,7 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 	}
 
 	public void atualizar(Denuncia denuncia) throws SQLException {
-		String sql = "update denuncia set setor = ?,cidade = ?,bairro = ?,descricao = ?";
+		String sql = "update denuncia set titulo = ?,setor = ?,cidade = ?,bairro = ?,descricao = ?, foto = ?, video = ? WHERE iddenuncia = ?";
 		PreparedStatement prepareStatement = conec.prepareStatement(sql);
 		
 		prepareStatement.setString(1, denuncia.getTitulo());
@@ -60,7 +60,9 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		prepareStatement.setString(3, denuncia.getCidade());
 		prepareStatement.setString(4, denuncia.getBairro());
 		prepareStatement.setString(5, denuncia.getDescricao());
-		
+		prepareStatement.setString(6, denuncia.getFoto());
+		prepareStatement.setString(7, denuncia.getVideo());
+		prepareStatement.setInt(8, denuncia.getIdDenuncia());
 		
 		
 		prepareStatement.executeUpdate();
@@ -106,6 +108,9 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 			String cidade = resultadoBusca.getString(4);
 			String bairro = resultadoBusca.getString(5);
 			String descricao = resultadoBusca.getString(6);
+			int idUsuario = resultadoBusca.getInt(7);
+			String foto = resultadoBusca.getString(9);
+			String video = resultadoBusca.getString(10);
 			
 			Denuncia denuncia1 = new Denuncia();
 			denuncia1.setIdDenuncia(Integer.parseInt(idDenuncia));
@@ -114,9 +119,12 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 			denuncia1.setCidade(cidade);
 			denuncia1.setBairro(bairro);
 			denuncia1.setDescricao(descricao);
+			denuncia1.setIdUsuario(idUsuario);
+			denuncia1.setFoto(foto);
+			denuncia1.setVideo(video);
 			
 			lista.add(denuncia1);
-		}//https://colorlib.com/wp/css3-table-templates/
+		}
 		return lista;
 	}
 	
@@ -127,18 +135,26 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		
 		ResultSet resultadoBusca = prepareStatement.executeQuery();
 		while(resultadoBusca.next()){
-			String titulo = resultadoBusca.getString(1);
-			String setor = resultadoBusca.getString(2);
-			String cidade = resultadoBusca.getString(3);
-			String bairro = resultadoBusca.getString(4);
-			String descricao = resultadoBusca.getString(5);
+			int idDenuncia = resultadoBusca.getInt(1);
+			String titulo = resultadoBusca.getString(2);
+			String setor = resultadoBusca.getString(3);
+			String cidade = resultadoBusca.getString(4);
+			String bairro = resultadoBusca.getString(5);
+			String descricao = resultadoBusca.getString(6);
+			int idUsuario = resultadoBusca.getInt(7);
+			String foto = resultadoBusca.getString(9);
+			String video = resultadoBusca.getString(10);
 			
 			Denuncia denuncia1 = new Denuncia();
+			denuncia1.setIdDenuncia(idDenuncia);
 			denuncia1.setTitulo(titulo);
 			denuncia1.setSetor(setor);
 			denuncia1.setCidade(cidade);
 			denuncia1.setBairro(bairro);
 			denuncia1.setDescricao(descricao);
+			denuncia1.setIdUsuario(idUsuario);
+			denuncia1.setFoto(foto);
+			denuncia1.setVideo(video);
 			
 			return denuncia1;
 		}

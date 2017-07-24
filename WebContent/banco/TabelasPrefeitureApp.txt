@@ -2,7 +2,7 @@ create table usuario(
 idusuario int(5) AUTO_INCREMENT,
 nome varchar(35),
 telefone varchar(14),
-email varchar(35),
+email varchar(35) unique,
 senha varchar(15),
 primary key(idusuario)
 );
@@ -10,7 +10,7 @@ primary key(idusuario)
 create table administrador(
 idadministrador int(5) AUTO_INCREMENT,
 nome varchar(35),
-email varchar(35),
+email varchar(35) unique,
 senha varchar(15),
 primary key(idadministrador)
 );
