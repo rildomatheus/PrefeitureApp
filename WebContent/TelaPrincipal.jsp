@@ -126,103 +126,6 @@ width: 32px;
 
 }
 
-/*---------------------------------------------*/
-header{
-display: inline-block;}
-#myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.1s;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    width: 100%;
-   
-}
-
-#myImg:hover {opacity: 0.7;}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (image) */
-.modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-}
-
-/* Caption of Modal Image */
-#caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-}
-
-/* Add Animation */
-.modal-content, #caption {    
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
-}
-
-/* The Close Button */
-.close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-    .modal-content {
-        width: 100%;
-    }
-}
-
-
 #botoes-camera{
     position: relative;
     margin-left: 80%;
@@ -231,6 +134,74 @@ display: inline-block;}
 }
 
 
+.modal {
+text-align: center;
+position: fixed;
+font-family: Arial, Helvetica, sans-serif;
+top: 50;
+right: auto;
+bottom: auto;
+left: auto;
+background: rgba(0,0,0,0.8);
+z-index: 99999;
+opacity:0;
+-webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+pointer-events: none;
+}
+
+.modal:target {
+opacity:1;
+pointer-events: auto;
+}
+
+.modal > div {
+width: 400px;
+position: relative;
+margin: 10% auto;
+padding: 5px 20px 13px 20px;
+border-radius: 10px;
+background: #fff;
+background: -moz-linear-gradient(#fff, #999);
+background: -webkit-linear-gradient(#fff, #999);
+background: -o-linear-gradient(#fff, #999);
+}
+
+.fechar {
+
+background: #606061;
+color: #FFFFFF;
+line-height: 25px;
+position: absolute;
+right: 12px;
+text-align: center;
+top: 10px;
+width: 24px;
+font-weight: bold;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+border-radius: 12px;
+-moz-box-shadow: 1px 1px 3px #000;
+-webkit-box-shadow: 1px 1px 3px #000;
+box-shadow: 1px 1px 3px #000;
+}
+
+.fechar:hover { background: #00d9ff; 
+text-decoration:none;}
+
+#imgExibi {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s;
+    
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+    
 </style>
 
 
@@ -288,15 +259,18 @@ display: inline-block;}
 					<li>Bairro: <%=denuncia.getBairro()%></li>
 					<li>Descricao: <%=denuncia.getDescricao()%></li>
 				</ul>
-				<%if(!denuncia.getFoto().equals("")){ %>
-				<img id="myImg" src="<%= denuncia.getFoto() %>" width="200" height="150">
-				<!-- The Modal -->
-				<div id="myModal" class="modal">
-  					<span class="close">&times;</span>
-  					<img class="modal-content" id="img01">
-  					<div id="caption"></div>
-				</div><%} %>
 				
+				<a href="#abrirModal<%=denuncia.getIdDenuncia() %>">
+				<img id="imgExibi"src="<%=denuncia.getFoto()%>" width="200" height="150"></a>
+				
+				<div id="abrirModal<%=denuncia.getIdDenuncia() %>" class="modal">	
+
+					<!-- conteúdo do modal aqui -->
+					<a href="#fechar" title="Fechar" class="fechar">x</a>
+					<img src="<%=denuncia.getFoto() %>">
+					
+				</div>
+			
 			</div>
 
 			<footer class="w3-container w3-blue">
@@ -320,7 +294,7 @@ display: inline-block;}
 					}else{ %>
 					<div class="comentario">
 					<%if(usuarioAutenticado.getTipo().equals("Administrador")){ %>
-						<div class="direita"><a href="ExcluirComentario?idComentario=<%=comentario.getIdComentario()%>&idUsuario=<%= usuarioAutenticado.getIdUsuario()%>"">X</a></div><%} %>
+						<div class="direita"><a href="ExcluirComentario?idComentario=<%=comentario.getIdComentario()%>&idUsuario=<%= usuarioAutenticado.getIdUsuario()%>">X</a></div><%} %>
 						<p id="usuarioAnonimo">Usuario Anônimo</p>
 						<p class="descricao"><%=comentario.getDescricao()%> </p>
 						
