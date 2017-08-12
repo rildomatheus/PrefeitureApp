@@ -12,17 +12,16 @@ public class Denuncia {
 	private int idUsuario;
 	private String foto;
 	private String video;
+	private String status;
 	
-
 	
-
+	
 	@Override
 	public String toString() {
 		return "Denuncia [idDenuncia=" + idDenuncia + ", titulo=" + titulo + ", comentario=" + comentario + ", setor="
 				+ setor + ", cidade=" + cidade + ", bairro=" + bairro + ", descricao=" + descricao + ", idUsuario="
-				+ idUsuario + ", foto=" + foto + ", video=" + video + "]";
+				+ idUsuario + ", foto=" + foto + ", video=" + video + ", status=" + status + "]";
 	}
-	
 	public String getFoto() {
 		return foto;
 	}
@@ -83,6 +82,13 @@ public class Denuncia {
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

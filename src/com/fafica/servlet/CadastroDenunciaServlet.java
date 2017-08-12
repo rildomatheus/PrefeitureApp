@@ -55,6 +55,7 @@ public class CadastroDenunciaServlet extends HttpServlet {
 		denuncia.setBairro(bairro);
 		denuncia.setDescricao(descricao);
 		denuncia.setIdUsuario(idUsuario);
+		denuncia.setStatus("Problema");
 		
 		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 		

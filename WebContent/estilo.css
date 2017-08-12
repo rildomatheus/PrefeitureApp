@@ -3,16 +3,17 @@ body {
   font-family: "Roboto", helvetica, arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
+  margin: 10px;
 
 }
 nav { 
 	position:relative;
-  	left: 50%;
+  	left:65%;
   	width: 100%;}
 #navegacao{
 	background-color:#2196f3;
-	padding: 0px 0px 0px 0px;
 	width:100%;
+	
 } 
 
 #menu ul li { 

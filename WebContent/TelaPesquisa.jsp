@@ -122,11 +122,8 @@ text-decoration: none;
 }
 
 .imagens-camera{
-
 width: 32px;
-box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
+
 }
 
 #botoes-camera{
@@ -134,7 +131,6 @@ box-shadow: 0 0 0 0;
     margin-left: 75%;
     margin-top: 25px;
     margin-bottom: 20px;
-    
 }
 
 
@@ -212,19 +208,19 @@ text-decoration:none;}
 </head>
 <body>
 	<%
-		RepositorioDenuncia repositorioDenuncia = new RepositorioDenuncia();
+		
 		RepositorioComentario repositorioComentario = new RepositorioComentario();
 		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 
-		List<Denuncia> denuncias = new ArrayList<Denuncia>();
+		Denuncia denuncia = new Denuncia();
 		List<Comentario> comentarios = new ArrayList<Comentario>();
 
 		comentarios = repositorioComentario.listarComentario();
-		denuncias = repositorioDenuncia.listar();
+		denuncia = (Denuncia) request.getAttribute("denuncia");
 
 		HttpSession sessao = request.getSession();
 		Usuario usuarioAutenticado = (Usuario) sessao.getAttribute("usuarioAutenticado");
-		System.out.println(usuarioAutenticado);
+
 		if (usuarioAutenticado == null) {
 			usuarioAutenticado = new Usuario();
 			usuarioAutenticado.setTipo("Anonimo");
@@ -241,27 +237,11 @@ text-decoration:none;}
 		}
 	%>
 
-	<%
-		for (Denuncia denuncia : denuncias) {
-		
-		//Pendente == Azul (Respondido)
-		//Resolvido == Verde (Prefeitura resolve)
-		//Bloqueado == vermelho (Prefeitura não respondeu)
-	%>
+	
 
 	<div class="w3-container">
-	
-	<%if(denuncia.getStatus().equals("Pendente")) {%>
 		<div class="w3-card-4" style="width: 40%;">
-	<%} %>
-	<%if(denuncia.getStatus().equals("Resolvido")){ %>
-		<div class="w3-card-4" style="width: 40%; box-shadow: -1px 0px 10px 3px green;">
-	<%} %>	
-	<%if(denuncia.getStatus().equals("Problema")){ %>
-		<div class="w3-card-4" style="width: 40%; box-shadow: -1px 0px 10px 3px red;">
-	<%} %>	
 			<header class="w3-container w3-blue">
-
 				<h1><%=denuncia.getTitulo()%></h1>
 				<form id="botoes-camera" action="Upload-Imagem.jsp">
 					<input type="hidden" id="idDenuncia" name="idDenuncia" value="<%=denuncia.getIdDenuncia()%>" />
@@ -291,9 +271,9 @@ text-decoration:none;}
 				</div>
 			<%} %>
 			</div>
-			
-			
+
 			<footer class="w3-container w3-blue">
+
 				<%
 					for (Comentario comentario : comentarios) {
 							if (denuncia.getIdDenuncia() == comentario.getIdDenuncia()) {
@@ -349,10 +329,6 @@ text-decoration:none;}
 
 	</div>
 
-	<%
-	sessao.setAttribute("usuarioAutenticado", usuarioAutenticado);
-		}
-	%>
 
 <script>
 // Get the modal

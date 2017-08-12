@@ -7,9 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro Denuncia</title>
 
-<link rel="stylesheet" type="text/css" href="cad-denuncia.css">
-<style>
 
+<style>
+	body {
+	background-color: white;
+	padding: 0px;
+	margin: 0px;
+}
 	.form {
   		background: #ffffff;
   		padding: 40px;

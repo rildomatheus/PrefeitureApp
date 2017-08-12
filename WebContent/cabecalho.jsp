@@ -6,13 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="estilo.css" media="screen">
+
 </head>
 <body>
 <%  HttpSession sessao = request.getSession();
-	Usuario usuarioAutenticado = (Usuario) sessao.getAttribute("usuarioAutenticado"); 
-	if(usuarioAutenticado != null){%>
+	Usuario usuarioAutenticado = (Usuario) sessao.getAttribute("usuarioAutenticado");
+	if (usuarioAutenticado == null) {
+		usuarioAutenticado = new Usuario();
+		usuarioAutenticado.setTipo("Anonimo");
+	}
+	if(!usuarioAutenticado.getTipo().equals("Anonimo")){%>
 	<div id="navegacao">
 		<nav id="menu">
+		
 			<ul id="nav">
 				<li class="selected"><a href="TelaPrincipal.jsp">Tela principal</a></li>
 				<li class="selected"><a href="CadastroDenuncia.jsp">Cadastrar denúncia</a></li>
@@ -22,6 +28,7 @@
 	</div>
 	<%}else{ %>
 	<div id="navegacao">
+	
 		<nav id="menu">
 			<ul id="nav">
 				<li class="selected"><a href="TelaPrincipal.jsp">Tela principal</a></li>

@@ -48,8 +48,6 @@ public class IndexServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		Usuario usuario = new Usuario();
 
-		
-		
 		try {
 			usuario = repositorioUsuario.consultar(login, senha);
 			if(usuario != null){
@@ -67,10 +65,5 @@ public class IndexServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		doGet(request, response);
 	}
-
 }
