@@ -3,7 +3,6 @@ package com.fafica.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,23 +31,6 @@ public class EditarDenuncia extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Denuncia denuncia = new Denuncia();
-		String i = request.getParameter("i");
-		if(i != null && i != " "){
-			int id = Integer.parseInt(i);
-			this.repositorio = RepositorioDenuncia.getInstance();
-			 try {
-				 
-				denuncia = repositorio.procurarId(id);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Editar.jsp");
-		request.setAttribute("denuncia", denuncia);
-		dispatcher.forward(request, response);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -59,7 +41,11 @@ public class EditarDenuncia extends HttpServlet {
 		String setor = request.getParameter("setor");
 		String cidade = request.getParameter("cidade");
 		String bairro = request.getParameter("bairro");
-		String descricao = request.getParameter("descricao"); 
+		String descricao = request.getParameter("descricao");
+		String status = request.getParameter("status");
+		String foto = request.getParameter("foto");
+		String video = request.getParameter("video");
+		int idDenuncia = Integer.parseInt(request.getParameter("idDenuncia"));
 		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 		
 		Denuncia denuncia = new Denuncia();
@@ -69,6 +55,10 @@ public class EditarDenuncia extends HttpServlet {
 		denuncia.setBairro(bairro);
 		denuncia.setDescricao(descricao);
 		denuncia.setIdUsuario(idUsuario);
+		denuncia.setStatus(status);
+		denuncia.setIdDenuncia(idDenuncia);
+		denuncia.setFoto(foto);
+		denuncia.setVideo(video);
 		
 		try {
 			repositorio.atualizar(denuncia);
@@ -77,10 +67,7 @@ public class EditarDenuncia extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("CadastroDenuncia.jsp");
-		
-		
-		doGet(request, response);
+		response.sendRedirect("TelaPrincipal.jsp");
 	
 	}
 

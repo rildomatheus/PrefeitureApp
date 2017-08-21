@@ -33,7 +33,7 @@
 			<ul id="nav">
 				<li class="selected"><a href="TelaPrincipal.jsp">Tela principal</a></li>
 				<li class="selected"><a href="CadastroDenuncia.jsp">Cadastrar denúncia</a></li>
-				<li class="selected"><a href="IndexServlet">Fazer login</a></li>
+				<li class="selected"><a href="Index.jsp">Fazer login</a></li>
 			</ul>
 		</nav>
 	</div><%} %>

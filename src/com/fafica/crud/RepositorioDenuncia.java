@@ -63,8 +63,9 @@ public class RepositorioDenuncia implements IRepositorioDenuncia {
 		prepareStatement.setString(5, denuncia.getDescricao());
 		prepareStatement.setString(6, denuncia.getFoto());
 		prepareStatement.setString(7, denuncia.getVideo());
-		prepareStatement.setInt(8, denuncia.getIdDenuncia());
-		prepareStatement.setString(9, denuncia.getStatus());
+		prepareStatement.setString(8, denuncia.getStatus());
+		prepareStatement.setInt(9, denuncia.getIdDenuncia());
+	
 		
 		
 		prepareStatement.executeUpdate();
